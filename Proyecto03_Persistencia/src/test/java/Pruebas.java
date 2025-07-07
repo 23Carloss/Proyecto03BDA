@@ -20,12 +20,13 @@ public class Pruebas {
         // TODO code application logic here
         CuentaDominio cuenta= new CuentaDominio();
         CuentaDAO dao = new CuentaDAO();
-        
-        cuenta.setContrasenha("1234567890");
-        cuenta.setCorreoE("luis12@gmail.com");
+//        
+        cuenta.setContrasenha("552834");
+        cuenta.setCorreoE("luis1205@outlook.es");
         cuenta.setNombreU("Luis12");
-        
-        dao.registrarse(cuenta);
+//        
+//        dao.registrarse(cuenta);
+        dao.editarCuenta(cuenta);
         
     }
     

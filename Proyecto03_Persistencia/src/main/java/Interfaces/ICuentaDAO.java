@@ -4,10 +4,17 @@
  */
 package Interfaces;
 
+import Dominio.AlbumDominio;
+import Dominio.CuentaDominio;
+import org.bson.Document;
+
 /**
  *
  * @author HP
  */
 public interface ICuentaDAO {
-    
+    public boolean iniciarSesion(String nombreU, String contra);
+    public Document registrarse(CuentaDominio cuenta);
+    public void editarCuenta(CuentaDominio cambios);
+    public void agregarAlbumFavoritos(CuentaDominio cuenta, AlbumDominio album);
 }

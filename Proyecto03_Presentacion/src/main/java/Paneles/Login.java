@@ -45,6 +45,11 @@ public class Login extends javax.swing.JPanel {
         BtnLogin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BtnLogin.setForeground(new java.awt.Color(255, 255, 255));
         BtnLogin.setText("Iniciar Sesion");
+        BtnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnLoginMouseClicked(evt);
+            }
+        });
         add(BtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 380, 60));
 
         BtnRegistro.setBackground(new java.awt.Color(204, 204, 204));
@@ -55,7 +60,7 @@ public class Login extends javax.swing.JPanel {
                 BtnRegistroMouseClicked(evt);
             }
         });
-        add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 660, 320, 60));
+        add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, 320, 60));
 
         labelContra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         labelContra.setText("Contrasenha");
@@ -73,6 +78,12 @@ public class Login extends javax.swing.JPanel {
         control.mostrarRegistro();
     }//GEN-LAST:event_BtnRegistroMouseClicked
 
+    private void BtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLoginMouseClicked
+        // TODO add your handling code here:
+        validarCredenciales();
+        //control.IniciarSesion()
+    }//GEN-LAST:event_BtnLoginMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnLogin;
@@ -83,4 +94,9 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JLabel labelCorreo;
     private javax.swing.JLabel labelTItulo;
     // End of variables declaration//GEN-END:variables
+
+    private void validarCredenciales(){
+        
+        control.validarCredenciales(campoCorreoE.getText(), campoContrasenha.getText());
+    }
 }

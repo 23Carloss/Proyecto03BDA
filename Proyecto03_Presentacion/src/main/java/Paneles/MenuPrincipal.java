@@ -4,16 +4,19 @@
  */
 package Paneles;
 
+import ControlNavegacion.controlApp;
+
 /**
  *
  * @author HP
  */
 public class MenuPrincipal extends javax.swing.JPanel {
-
+    private controlApp control;
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(controlApp control) {
+        this.control = control;
         initComponents();
     }
 
@@ -27,24 +30,24 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        BtnPerfil = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("Biblioteca");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Perfil");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, 90, 40));
+        BtnPerfil.setBackground(new java.awt.Color(51, 51, 51));
+        BtnPerfil.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BtnPerfil.setForeground(new java.awt.Color(255, 255, 255));
+        BtnPerfil.setText("Perfil");
+        add(BtnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 40));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BtnPerfil;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
