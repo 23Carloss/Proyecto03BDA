@@ -5,3 +5,4 @@ Dominio\BandaDominio.class
 Dominio\ArtistaBandaDominio.class
 Dominio\CuentaDominio.class
 Dominio\CancionDominio.class
+Conexion\ConexionBaseDatos.class

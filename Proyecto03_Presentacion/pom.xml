@@ -6,17 +6,22 @@
         <artifactId>Proyecto03BDA</artifactId>
         <version>0</version>
     </parent>
-    <artifactId>Proyecto03_Persistencia</artifactId>
+    <artifactId>Proyecto03_Presentacion</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE250</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Proyecto03_Dominio</artifactId>
+            <artifactId>Negocio</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
         <maven.compiler.release>23</maven.compiler.release>
-        <exec.mainClass>error.proyecto03_persistencia.Proyecto03_Persistencia</exec.mainClass>
+        <exec.mainClass>error.proyecto03_presentacion.Proyecto03_Presentacion</exec.mainClass>
     </properties>
 </project>

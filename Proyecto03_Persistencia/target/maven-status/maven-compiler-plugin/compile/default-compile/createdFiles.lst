@@ -1,5 +1,6 @@
 DAO\CancionDAO.class
 DAO\CuentaDAO.class
 DAO\AlbumDAO.class
+Interfaces\ICuentaDAO.class
 Pruebas\Proyecto03_Persistencia.class
 DAO\ArtistaDAO.class

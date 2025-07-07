@@ -18,6 +18,7 @@ public class BandaDominio {
     private String nombreBanda, genero;
     private Icon portada;
     private ArrayList<ArtistaBandaDominio> listaIntegrantes;
+    private ArrayList<AlbumDominio> listaAlbumes;
 
     public BandaDominio() {
     }
@@ -54,10 +55,16 @@ public class BandaDominio {
         this.listaIntegrantes = listaIntegrantes;
     }
 
+    public ArrayList<AlbumDominio> getListaAlbumes() {
+        return listaAlbumes;
+    }
+
+    public void setListaAlbumes(ArrayList<AlbumDominio> listaAlbumes) {
+        this.listaAlbumes = listaAlbumes;
+    }
+
     @Override
     public String toString() {
-        return "BandaDominio{" + "_id=" + _id + ", nombreBanda=" + nombreBanda + ", genero=" + genero + ", portada=" + portada + ", listaIntegrantes=" + listaIntegrantes + '}';
+        return "BandaDominio{" + "_id=" + _id + ", nombreBanda=" + nombreBanda + ", genero=" + genero + ", portada=" + portada + ", listaIntegrantes=" + listaIntegrantes + ", listaAlbumes=" + listaAlbumes + '}';
     }
-    
-    
 }

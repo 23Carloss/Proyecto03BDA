@@ -3,33 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package Dominio;
+package DTO;
 
+import Dominio.AlbumDominio;
 import java.util.ArrayList;
-import javax.swing.Icon;
-import org.bson.types.ObjectId;
 
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
-public class ArtistaSolitarioDominio {
-    private ObjectId _id;
+public class ArtistaSolitarioDTO {
     private String nombre, genero;
-    private Icon portada;
     private ArrayList<AlbumDominio> listaAlbumes;
 
-    public ArtistaSolitarioDominio() {
+    public ArtistaSolitarioDTO() {
     }
 
-    public ObjectId getId() {
-        return _id;
+    public ArtistaSolitarioDTO(String nombre, String genero, ArrayList<AlbumDominio> listaAlbumes) {
+        this.nombre = nombre;
+        this.genero = genero;
+        this.listaAlbumes = listaAlbumes;
     }
-
-    public void setId(ObjectId _id) {
-        this._id = _id;
-    }
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -46,14 +41,6 @@ public class ArtistaSolitarioDominio {
         this.genero = genero;
     }
 
-    public Icon getPortada() {
-        return portada;
-    }
-
-    public void setPortada(Icon portada) {
-        this.portada = portada;
-    }
-
     public ArrayList<AlbumDominio> getListaAlbumes() {
         return listaAlbumes;
     }
@@ -64,7 +51,7 @@ public class ArtistaSolitarioDominio {
 
     @Override
     public String toString() {
-        return "ArtistaSolitarioDominio{" + "_id=" + _id + ", nombre=" + nombre + ", genero=" + genero + ", portada=" + portada + ", listaAlbumes=" + listaAlbumes + '}';
+        return "ArtistaDTO{" + "nombre=" + nombre + ", genero=" + genero + ", listaAlbumes=" + listaAlbumes + '}';
     }
     
 }
