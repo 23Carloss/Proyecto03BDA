@@ -42,8 +42,18 @@ public class MenuPrincipal extends javax.swing.JPanel {
         BtnPerfil.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BtnPerfil.setForeground(new java.awt.Color(255, 255, 255));
         BtnPerfil.setText("Perfil");
+        BtnPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnPerfilMouseClicked(evt);
+            }
+        });
         add(BtnPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnPerfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnPerfilMouseClicked
+        // TODO add your handling code here:
+        control.mostrarMenuPerfil();
+    }//GEN-LAST:event_BtnPerfilMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

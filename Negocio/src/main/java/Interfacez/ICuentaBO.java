@@ -13,7 +13,7 @@ import Dominio.CuentaDominio;
  */
 public interface ICuentaBO {
     public CuentaDominio registrarse(CuentaDTO cuenta);
-    public Boolean IniciarSesion(String nombreU, String contra);
+    public CuentaDominio IniciarSesion(String nombreU, String contra);
     public void editarPerfil(CuentaDominio cuenta);
     
 }

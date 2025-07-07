@@ -22,7 +22,7 @@ import org.bson.Document;
 public class CuentaDAO implements ICuentaDAO {
     
     private MongoDatabase bd;
-    private MongoCollection<Document> coleccionCuentas;
+    private MongoCollection<CuentaDominio> coleccionCuentas;
     private Encriptador encriptador;
     
     private static CuentaDAO instanciaCuentaDAO;
@@ -35,39 +35,39 @@ public class CuentaDAO implements ICuentaDAO {
     }
     public CuentaDAO(){
         bd = new ConexionBaseDatos().conexion();
-        this.coleccionCuentas = bd.getCollection("Cuenta");
+        this.coleccionCuentas = bd.getCollection("Cuenta", CuentaDominio.class);
         this.encriptador = new Encriptador();
     }
     @Override
-    public boolean iniciarSesion(String corrreoE, String contra){
-        for(Document cuenta : coleccionCuentas.find()){
-            if(cuenta.getString("correoE").equals(corrreoE)){
-                System.out.println("Cuenta encontrada:  " + cuenta.getString("nombreUsuario"));
+    public CuentaDominio iniciarSesion(String corrreoE, String contra){
+        for(CuentaDominio cuenta : coleccionCuentas.find()){
+            if(cuenta.getCorreoE().equals(corrreoE)){
+                System.out.println("Cuenta encontrada:  " + cuenta.toString());
+                obtenerCuenta(corrreoE);
                 //validar contrasenha
                 // la variable "contra" es la q ingresa el usuario y la encriptamos
-                if(encriptador.encriptarContrasenha(contra).equals(cuenta.getString("contrasenha"))){//verificamos con la contra que tenemos guardada en la bd (ya encriptada)
+                if(encriptador.encriptarContrasenha(contra).equals(cuenta.getContrasenha())){//verificamos con la contra que tenemos guardada en la bd (ya encriptada)
                     System.out.println("Inicio de sesion correcto!");
-                    return true;
+                    return obtenerCuenta(cuenta.getCorreoE()); // obtenemos la cuenta una vez iniciada la sesion
+                    
+                    
                 }else{
                     //control.mostrarErrorCredencialesIncorrectas();
                     System.out.println("Credenciales Incorrectas!");
-                    return false;
+                    return null;
                 }
             }
         }
         System.out.println("No se encontro una cuenta con el nombre:  " + corrreoE);
-        return false;
+        return null;
     }
     @Override
-    public Document registrarse(CuentaDominio cuenta){
+    public CuentaDominio registrarse(CuentaDominio cuenta){
 //        System.out.println("Cuenta que llega a la DAO:  " + cuenta.toString());
-        Document cuentaDocumento = new Document();
-        cuentaDocumento.append("nombreUsuario", cuenta.getNombreU());
-        cuentaDocumento.append("correoE", cuenta.getCorreoE());
-        cuentaDocumento.append("contrasenha", encriptador.encriptarContrasenha(cuenta.getContrasenha()));
-        coleccionCuentas.insertOne(cuentaDocumento);
+        cuenta.setContrasenha(encriptador.encriptarContrasenha(cuenta.getContrasenha()));
+        coleccionCuentas.insertOne(cuenta);
 //        System.out.println("Cuenta que sale de la DAO:  " + cuentaDocumento.toString());
-        return cuentaDocumento;
+        return cuenta;
 //        ArrayList<CuentaDominio> cuentas = coleccionCuentas.find();
         
     }
@@ -96,6 +96,17 @@ public class CuentaDAO implements ICuentaDAO {
     @Override
     public void agregarAlbumFavoritos(CuentaDominio cuenta, AlbumDominio album){
         cuenta.getListaAlbumenFav().add(album);
+        
+    }
+    
+    @Override
+    public CuentaDominio obtenerCuenta(String correoE){
+        for (CuentaDominio cuenta : coleccionCuentas.find()) {
+            if(cuenta.getCorreoE().equals(correoE)){
+                return cuenta;
+            }
+        }
+        return null;
         
     }
     public ArrayList<CuentaDominio> consultarCuentas(){

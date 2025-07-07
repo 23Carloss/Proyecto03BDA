@@ -96,7 +96,6 @@ public class Login extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void validarCredenciales(){
-        
         control.validarCredenciales(campoCorreoE.getText(), campoContrasenha.getText());
     }
 }

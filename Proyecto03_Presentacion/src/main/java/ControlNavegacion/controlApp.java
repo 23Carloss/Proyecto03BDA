@@ -5,13 +5,17 @@
 
 package ControlNavegacion;
 
+import DTO.CuentaDTO;
+import Dominio.CuentaDominio;
 import FrabicaBO.FabricaBO;
 import Interfacez.ICuentaBO;
 import Paneles.Login;
 import Paneles.MenuPrincipal;
+import Paneles.Perfil;
 import Paneles.Registrarse;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -22,24 +26,37 @@ public class controlApp {
     private Login login;
     private Registrarse panelRegistro;
     private MenuPrincipal menuPrincipal;
+    private Perfil perfil;
     private JFrame framePrincipal;
     
     //Objetos BO se ocupa la fabrica
     private FabricaBO fabrica;
     private ICuentaBO cuentaBO;
     
+    //DTO temporales
+    private CuentaDTO cuentaTemporal;
     
     public controlApp(){
         
     }
+    public void iniciar(){
+        valoresDefault();
+    }
     public void valoresDefault(){
 //        cuentaBO = new CuentaBO(cuenta); ya q tengamos la fabrica
         framePrincipal = new JFrame("Biblioteca Musical#4");
+        framePrincipal.setVisible(true);
+        framePrincipal.setLocationRelativeTo(null);
+        framePrincipal.setSize(1050, 700);
+        framePrincipal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        
         cuentaBO = fabrica.CrearCuentaBO();
         
         if(login == null){
             login = new Login(this);
             cambiarPanel(login);
+            
             return;
         }
         cambiarPanel(login);
@@ -55,6 +72,10 @@ public class controlApp {
         menuPrincipal = new MenuPrincipal(this);
         cambiarPanel(menuPrincipal);
     }
+    public void mostrarMenuPerfil(){
+        perfil = new Perfil(this);
+        cambiarPanel(perfil);
+    }
     
     public void cambiarPanel(JPanel jpanel) {
         framePrincipal.getContentPane().removeAll();
@@ -63,12 +84,22 @@ public class controlApp {
         framePrincipal.revalidate();
     }
     
-    public void validarCredenciales(String nombreU, String contra){
-        Boolean continuar = cuentaBO.IniciarSesion(nombreU, contra);
-        if(continuar){
+    public void validarCredenciales(String correoE, String contra){
+        CuentaDominio continuar = cuentaBO.IniciarSesion(correoE, contra);
+        if(continuar != null){
+            cuentaTemporal= new CuentaDTO();
+            cuentaTemporal.setContrasenha(contra);
+            cuentaTemporal.setCorreoE(continuar.getCorreoE());
+            cuentaTemporal.setNombreU(continuar.getNombreU());
             mostrarMenuPrincipal();
-        }
-        
+        }    
+    }
+    public void obtenerCuentaRegistro(CuentaDTO cuenta){
+        this.cuentaTemporal = cuenta;
+        cuentaBO.registrarse(cuenta);
+    }
+    public CuentaDTO obtenerCuenta(){
+        return cuentaTemporal;
         
     }
     

@@ -80,12 +80,17 @@ public class Registrarse extends javax.swing.JPanel {
                 BtnContinuarMouseClicked(evt);
             }
         });
-        add(BtnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 680, 160, 60));
+        add(BtnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 580, 160, 60));
 
         BtnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         BtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BtnCancelar.setText("Cancelar");
-        add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 160, 60));
+        BtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnCancelarMouseClicked(evt);
+            }
+        });
+        add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 580, 160, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnContinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnContinuarMouseClicked
@@ -93,6 +98,11 @@ public class Registrarse extends javax.swing.JPanel {
             obtenerDatos();
             control.mostrarMenuPrincipal();
     }//GEN-LAST:event_BtnContinuarMouseClicked
+
+    private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
+        // TODO add your handling code here:
+        control.iniciar();
+    }//GEN-LAST:event_BtnCancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -117,7 +127,7 @@ public class Registrarse extends javax.swing.JPanel {
         cuenta.setNombreU(nombreU);
         cuenta.setCorreoE(correE);
         cuenta.setContrasenha(contra);
-        
+        control.obtenerCuentaRegistro(cuenta);
         System.out.println("Cuenta a agregar:  " + cuenta.toString());
         
     }

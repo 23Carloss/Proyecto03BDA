@@ -26,25 +26,33 @@ public class CuentaBO implements ICuentaBO{
     
     @Override
     public CuentaDominio registrarse(CuentaDTO cuenta){
+        String contrasenhaSinEncriptar = cuenta.getContrasenha();
+        System.out.println("Cuenta que llega a la BO desde Presentacion:  " + cuenta.toString());
         CuentaDominio cuentaRegistrar = new CuentaDominio();
-        cuentaRegistrar.setContrasenha(cuenta.getContrasenha());
         
+        cuentaRegistrar.setContrasenha(contrasenhaSinEncriptar); // para mostrar la contrasenha sin encriptar
         cuentaRegistrar.setCorreoE(cuenta.getCorreoE());
         cuentaRegistrar.setNombreU(cuenta.getNombreU());
         cuentaRegistrar.setListaAlbumenFav(cuenta.getAlbumesFav());
         cuentaRegistrar.setImagenPerfil(cuenta.getImagenPerfil());
-        Document cuentaAgregada = cuentaDAO.registrarse(cuentaRegistrar);
+        
+        CuentaDominio cuentaAgregada = cuentaDAO.registrarse(cuentaRegistrar);
         System.out.println("Cuenta agregada que manda la dao:   "+ cuentaAgregada.toString());
-        return cuentaRegistrar;
+        return cuentaAgregada;
     }
     @Override
-    public Boolean IniciarSesion(String correoE, String contra){
+    public CuentaDominio IniciarSesion(String correoE, String contra){
         return cuentaDAO.iniciarSesion(correoE, contra);
+        
     }
     @Override
     public void editarPerfil(CuentaDominio cuenta){
         cuentaDAO.editarCuenta(cuenta);
     }
+    
+    
+
+  
 //    public ArrayList<CuentaDominio> consultarCuentas(){
 //        return cuentaDAO.consultarCuentas();
 //    }

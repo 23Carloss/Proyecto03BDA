@@ -5,6 +5,7 @@
 package Paneles;
 
 import ControlNavegacion.controlApp;
+import DTO.CuentaDTO;
 
 /**
  *
@@ -12,12 +13,14 @@ import ControlNavegacion.controlApp;
  */
 public class Perfil extends javax.swing.JPanel {
     private controlApp control;
+    private CuentaDTO cuentaTem;
     /**
      * Creates new form Perfil
      */
     public Perfil(controlApp control) {
         this.control = control;
         initComponents();
+        valoresDefault();
     }
 
     /**
@@ -30,14 +33,14 @@ public class Perfil extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        labelNombreU = new javax.swing.JLabel();
+        campoNombreU = new javax.swing.JLabel();
         panelImagenPerfil = new javax.swing.JPanel();
         labelTitulo = new javax.swing.JLabel();
         panelInfoCuenta = new javax.swing.JPanel();
         campoCorreoE = new javax.swing.JLabel();
         labelInfo = new javax.swing.JLabel();
         campoContra = new javax.swing.JLabel();
-        labelCorreoE1 = new javax.swing.JLabel();
+        labelCorreoE = new javax.swing.JLabel();
         labelContra = new javax.swing.JLabel();
         BtnEditar = new javax.swing.JButton();
         campoBusqueda = new javax.swing.JTextField();
@@ -48,9 +51,9 @@ public class Perfil extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelNombreU.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        labelNombreU.setText("nombre de usuario");
-        jPanel1.add(labelNombreU, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
+        campoNombreU.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        campoNombreU.setText("nombre de usuario");
+        jPanel1.add(campoNombreU, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 340, -1));
 
         panelImagenPerfil.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(panelImagenPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 160, 150));
@@ -74,9 +77,9 @@ public class Perfil extends javax.swing.JPanel {
         campoContra.setText("Correo electronico:");
         panelInfoCuenta.add(campoContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, -1));
 
-        labelCorreoE1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        labelCorreoE1.setText("Correo electronico:");
-        panelInfoCuenta.add(labelCorreoE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        labelCorreoE.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelCorreoE.setText("Correo electronico:");
+        panelInfoCuenta.add(labelCorreoE, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         labelContra.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         labelContra.setText("Contrasenha:");
@@ -119,6 +122,7 @@ public class Perfil extends javax.swing.JPanel {
 
     private void BtnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenuMouseClicked
         // TODO add your handling code here:
+        control.mostrarMenuPrincipal();
     }//GEN-LAST:event_BtnMenuMouseClicked
 
 
@@ -128,17 +132,22 @@ public class Perfil extends javax.swing.JPanel {
     private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel campoContra;
     private javax.swing.JLabel campoCorreoE;
+    private javax.swing.JLabel campoNombreU;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelContra;
-    private javax.swing.JLabel labelCorreoE1;
+    private javax.swing.JLabel labelCorreoE;
     private javax.swing.JLabel labelInfo;
-    private javax.swing.JLabel labelNombreU;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel panelImagenPerfil;
     private javax.swing.JPanel panelInfoCuenta;
     // End of variables declaration//GEN-END:variables
 
 
-
+    private void valoresDefault(){
+        cuentaTem = control.obtenerCuenta();
+        campoNombreU.setText(cuentaTem.getNombreU());
+        campoCorreoE.setText(cuentaTem.getCorreoE());
+        campoContra.setText(cuentaTem.getContrasenha());      
+    }
 
 }
