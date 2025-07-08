@@ -12,8 +12,8 @@ import Dominio.CuentaDominio;
  * @author HP
  */
 public interface ICuentaBO {
-    public CuentaDominio registrarse(CuentaDTO cuenta);
-    public CuentaDominio IniciarSesion(String nombreU, String contra);
-    public void editarPerfil(CuentaDominio cuenta);
+    public CuentaDTO registrarse(CuentaDTO cuenta);
+    public CuentaDTO IniciarSesion(String nombreU, String contra);
+    public void editarPerfil(CuentaDTO cuentaCambios, CuentaDTO cuentaAEditar);
     
 }

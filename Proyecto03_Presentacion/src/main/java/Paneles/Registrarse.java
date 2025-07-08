@@ -96,12 +96,12 @@ public class Registrarse extends javax.swing.JPanel {
     private void BtnContinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnContinuarMouseClicked
         // TODO add your handling code here:
             obtenerDatos();
-            control.mostrarMenuPrincipal();
+            control.mostrarLogin();
     }//GEN-LAST:event_BtnContinuarMouseClicked
 
     private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
         // TODO add your handling code here:
-        control.iniciar();
+        control.mostrarLogin();
     }//GEN-LAST:event_BtnCancelarMouseClicked
 
 
@@ -127,7 +127,7 @@ public class Registrarse extends javax.swing.JPanel {
         cuenta.setNombreU(nombreU);
         cuenta.setCorreoE(correE);
         cuenta.setContrasenha(contra);
-        control.obtenerCuentaRegistro(cuenta);
+        control.setCuentaRegistro(cuenta);
         System.out.println("Cuenta a agregar:  " + cuenta.toString());
         
     }

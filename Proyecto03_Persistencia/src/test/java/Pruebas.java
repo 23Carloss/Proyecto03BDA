@@ -23,10 +23,10 @@ public class Pruebas {
 //        
         cuenta.setContrasenha("552834");
         cuenta.setCorreoE("luis1205@outlook.es");
-        cuenta.setNombreU("Luis12");
+        cuenta.setNombreUsuario("Luis12");
 //        
 //        dao.registrarse(cuenta);
-        dao.editarCuenta(cuenta);
+//        dao.editarCuenta(cuenta);
         
     }
     

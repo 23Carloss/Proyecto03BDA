@@ -8,12 +8,14 @@ package DTO;
 import Dominio.AlbumDominio;
 import java.util.ArrayList;
 import javax.swing.Icon;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class CuentaDTO {
+    private ObjectId _id;
     private String nombreU, correoE, contrasenha;
     private Icon imagenPerfil;
     private ArrayList<AlbumDominio> albumesFav;
@@ -29,6 +31,13 @@ public class CuentaDTO {
         this.albumesFav = albumesFav;
     }
 
+    public ObjectId getId() {
+        return _id;
+    }
+
+    public void setId(ObjectId _id) {
+        this._id = _id;
+    }
     public String getNombreU() {
         return nombreU;
     }
@@ -71,9 +80,7 @@ public class CuentaDTO {
 
     @Override
     public String toString() {
-        return "CuentaDTO{" + "nombreU=" + nombreU + ", correoE=" + correoE + ", contrasenha=" + contrasenha + ", imagenPerfil=" + imagenPerfil + ", albumesFav=" + albumesFav + '}';
+        return "CuentaDTO{" + "_id=" + _id + ", nombreU=" + nombreU + ", correoE=" + correoE + ", contrasenha=" + contrasenha + ", imagenPerfil=" + imagenPerfil + ", albumesFav=" + albumesFav + '}';
     }
-    
-    
     
 }

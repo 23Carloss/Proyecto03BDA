@@ -39,6 +39,7 @@ public class controlApp {
     
     //DTO temporales
     private CuentaDTO cuentaTemporal;
+    private CuentaDTO cuentaTemporalEditar;
     
     public controlApp(){
         
@@ -68,6 +69,10 @@ public class controlApp {
     }
             
             
+    public void mostrarLogin(){
+        login = new Login(this);
+        cambiarPanel(login);
+    }
     public void mostrarRegistro(){
         panelRegistro = new Registrarse(this);
         cambiarPanel(panelRegistro);
@@ -87,15 +92,18 @@ public class controlApp {
     public void mostrarConfirmarCambios(){
         resumenCambios = new ResumenCambios(this);
         cambiarPanel(resumenCambios);
-        confirmarCambios();
     }
     
-    public void confirmarCambios(){
-        CuentaDominio cuentaEditada = new CuentaDominio();
-        cuentaEditada.setNombreU(cuentaTemporal.getNombreU());
-        cuentaEditada.setCorreoE(cuentaTemporal.getCorreoE());
-        cuentaEditada.setContrasenha(cuentaTemporal.getContrasenha());
-        cuentaBO.editarPerfil(cuentaEditada);
+    public void confirmarCambios(CuentaDTO cuentaEditada){
+        cuentaEditada.setNombreU(cuentaTemporalEditar.getNombreU());
+        cuentaEditada.setCorreoE(cuentaTemporalEditar.getCorreoE());
+        cuentaEditada.setContrasenha(cuentaTemporalEditar.getContrasenha());
+        cuentaEditada.setId(cuentaTemporalEditar.getId());
+//        System.out.println("Control>confirmarCambios> cuentaEditada(Parametro)> "+ cuentaEditada.toString());
+//        System.out.println("Control>confirmarCambios> obtenerCuentaEditada(Metodo regeresa cuentaDTO)> "+  obtenerCuentaEditada().toString());
+        cuentaBO.editarPerfil(cuentaTemporal,cuentaEditada);
+        cuentaTemporal = cuentaTemporalEditar;
+        mostrarMenuPerfil();
     }
     
     public void cambiarPanel(JPanel jpanel) {
@@ -105,23 +113,38 @@ public class controlApp {
         framePrincipal.revalidate();
     }
     
-    public void validarCredenciales(String correoE, String contra){
-        CuentaDominio continuar = cuentaBO.IniciarSesion(correoE, contra);
+    public void validarCredenciales(){
+        CuentaDTO continuar = cuentaBO.IniciarSesion(cuentaTemporal.getCorreoE(), cuentaTemporal.getContrasenha());
+        System.out.println("Cuenta q llega a presentacion>InicioSesion  " + continuar.toString());
         if(continuar != null){
-            cuentaTemporal= new CuentaDTO();
-            cuentaTemporal.setContrasenha(contra);
+            cuentaTemporal= continuar;
+            cuentaTemporal.setContrasenha(cuentaTemporal.getContrasenha());//dto sin ecnriptaar
             cuentaTemporal.setCorreoE(continuar.getCorreoE());
             cuentaTemporal.setNombreU(continuar.getNombreU());
+            cuentaTemporal.setId(continuar.getId());
+            setCuenta(continuar);
             mostrarMenuPrincipal();
         }    
     }
-    public void obtenerCuentaRegistro(CuentaDTO cuenta){
+    public void setCuentaRegistro(CuentaDTO cuenta){
         this.cuentaTemporal = cuenta;
         cuentaBO.registrarse(cuenta);
     }
     public CuentaDTO obtenerCuenta(){
-        return cuentaTemporal;
-        
+        return cuentaTemporal; 
+    }
+    public CuentaDTO obtenerCuentaEditada(){
+        if(cuentaTemporalEditar!=null){
+            return cuentaTemporalEditar;
+        }
+        return cuentaTemporalEditar = new CuentaDTO();
+         //nueva cuenta para ver si quiere guardar los cambios
+    }
+    public void setCuenta(CuentaDTO cuenta){
+       this.cuentaTemporal = cuenta; 
+    }
+    public void setCuentaAEditar(CuentaDTO cuenta){
+       this.cuentaTemporalEditar = cuenta; 
     }
     
     

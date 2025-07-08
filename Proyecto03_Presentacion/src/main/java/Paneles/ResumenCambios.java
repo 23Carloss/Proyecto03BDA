@@ -88,7 +88,7 @@ public class ResumenCambios extends javax.swing.JPanel {
         jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 560, 130, 40));
 
         BtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        BtnCancelar.setText("Confirmar");
+        BtnCancelar.setText("Cancelar");
         BtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnCancelarMouseClicked(evt);
@@ -101,7 +101,7 @@ public class ResumenCambios extends javax.swing.JPanel {
 
     private void BtnConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnConfirmarMouseClicked
         // TODO add your handling code here:
-        control.mostrarConfirmarCambios();
+        control.confirmarCambios(cuentaTemp);
     }//GEN-LAST:event_BtnConfirmarMouseClicked
 
     private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
@@ -124,7 +124,8 @@ public class ResumenCambios extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatos(){
-        cuentaTemp = control.obtenerCuenta();
+        cuentaTemp = control.obtenerCuentaEditada();
+        //control.setCuenta(cuentaTemp)//CuentaDTO
         campoNuevoNombre.setText(cuentaTemp.getNombreU());
         campoNuevoCorreo.setText(cuentaTemp.getCorreoE());
         campoNuevaContra.setText(cuentaTemp.getContrasenha());

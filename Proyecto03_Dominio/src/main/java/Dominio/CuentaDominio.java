@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
  */
 public class CuentaDominio {
     private ObjectId _id;
-    private String nombreU, correoE, contrasenha;
+    private String nombreUsuario, correoE, contrasenha;
     private Icon imagenPerfil;
     private ArrayList<AlbumDominio> listaAlbumenFav;
 
@@ -26,15 +26,19 @@ public class CuentaDominio {
     public ObjectId getId() {
         return _id;
     }
+
+    public void setId(ObjectId _id) {
+        this._id = _id;
+    }
     
     
-    public String getNombreU() {
-        return nombreU;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
     
 
-    public void setNombreU(String nombreU) {
-        this.nombreU = nombreU;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getCorreoE() {
@@ -71,7 +75,7 @@ public class CuentaDominio {
     
     @Override
     public String toString() {
-        return "CuentaDominio{" + "_id=" + _id + ", nombreU=" + nombreU + ", correoE=" + correoE + ", contrasenha=" + contrasenha + ", listaAlbumenFav=" + listaAlbumenFav + '}';
+        return "CuentaDominio{" + "_id=" + _id + ", nombreU=" + nombreUsuario + ", correoE=" + correoE + ", contrasenha=" + contrasenha + ", listaAlbumenFav=" + listaAlbumenFav + '}';
     }
 
     

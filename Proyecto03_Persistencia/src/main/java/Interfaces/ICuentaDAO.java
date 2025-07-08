@@ -15,7 +15,7 @@ import org.bson.Document;
 public interface ICuentaDAO {
     public CuentaDominio iniciarSesion(String nombreU, String contra);
     public CuentaDominio registrarse(CuentaDominio cuenta);
-    public void editarCuenta(CuentaDominio cambios);
+    public void editarCuenta(CuentaDominio cambios,CuentaDominio cuentaAEditar);
     public void agregarAlbumFavoritos(CuentaDominio cuenta, AlbumDominio album);
     public CuentaDominio obtenerCuenta(String correoE);
 }

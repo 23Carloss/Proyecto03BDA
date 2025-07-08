@@ -25,29 +25,57 @@ public class CuentaBO implements ICuentaBO{
     }
     
     @Override
-    public CuentaDominio registrarse(CuentaDTO cuenta){
+    public CuentaDTO registrarse(CuentaDTO cuenta){
         String contrasenhaSinEncriptar = cuenta.getContrasenha();
         System.out.println("Cuenta que llega a la BO desde Presentacion:  " + cuenta.toString());
         CuentaDominio cuentaRegistrar = new CuentaDominio();
         
         cuentaRegistrar.setContrasenha(contrasenhaSinEncriptar); // para mostrar la contrasenha sin encriptar
         cuentaRegistrar.setCorreoE(cuenta.getCorreoE());
-        cuentaRegistrar.setNombreU(cuenta.getNombreU());
+        cuentaRegistrar.setNombreUsuario(cuenta.getNombreU());
         cuentaRegistrar.setListaAlbumenFav(cuenta.getAlbumesFav());
         cuentaRegistrar.setImagenPerfil(cuenta.getImagenPerfil());
         
         CuentaDominio cuentaAgregada = cuentaDAO.registrarse(cuentaRegistrar);
-        System.out.println("Cuenta agregada que manda la dao:   "+ cuentaAgregada.toString());
-        return cuentaAgregada;
+        cuenta.setContrasenha(cuenta.getContrasenha());//sin encriptar
+        cuenta.setCorreoE(cuentaAgregada.getCorreoE());
+        cuenta.setNombreU(cuentaAgregada.getNombreUsuario());
+        
+        System.out.println("Cuenta agregada que manda la dao>BO>Registrarse:   "+ cuentaAgregada.toString());
+        System.out.println("Cuenta que regresa a presentacion>BO>Registrarse:   "+ cuenta.toString());
+        return cuenta;
     }
     @Override
-    public CuentaDominio IniciarSesion(String correoE, String contra){
-        return cuentaDAO.iniciarSesion(correoE, contra);
+    public CuentaDTO IniciarSesion(String correoE, String contra){
+        CuentaDTO cuentaEncontrada = new CuentaDTO();
+        CuentaDominio cuentaEncontradaDominio = cuentaDAO.iniciarSesion(correoE, contra);
+        cuentaEncontrada.setContrasenha(contra);//para mostrar la contra sin encriptacion      
+        cuentaEncontrada.setCorreoE(cuentaEncontradaDominio.getCorreoE());
+        cuentaEncontrada.setNombreU(cuentaEncontradaDominio.getNombreUsuario());
+        cuentaEncontrada.setId(cuentaEncontradaDominio.getId());
+        System.out.println("Cuenta que regresa a presentacion>BO>IniciarSesion:   "+ cuentaEncontrada.toString());
+        return cuentaEncontrada;
         
     }
     @Override
-    public void editarPerfil(CuentaDominio cuenta){
-        cuentaDAO.editarCuenta(cuenta);
+    public void editarPerfil(CuentaDTO cuenta, CuentaDTO cuentaAEditar){
+        CuentaDominio cuentaAEditadaDominio = new CuentaDominio();
+        CuentaDominio cuentaActualDominio = new CuentaDominio();
+        
+        cuentaAEditadaDominio.setContrasenha(cuentaAEditar.getContrasenha());
+        cuentaAEditadaDominio.setCorreoE(cuentaAEditar.getCorreoE());
+        cuentaAEditadaDominio.setNombreUsuario(cuentaAEditar.getNombreU());
+        cuentaAEditadaDominio.setId(cuentaAEditar.getId());
+        
+        cuentaActualDominio.setContrasenha(cuenta.getContrasenha());
+        cuentaActualDominio.setCorreoE(cuenta.getCorreoE());
+        cuentaActualDominio.setNombreUsuario(cuenta.getNombreU());
+        cuentaActualDominio.setId(cuenta.getId());
+        
+        System.out.println("Cuenta editada Dominio> BO >edtiar  " + cuentaAEditadaDominio.toString());
+        System.out.println("Cuenta a editar Dominio> BO >editar>(cuentaActual)  " + cuentaActualDominio.toString());
+        
+        cuentaDAO.editarCuenta(cuentaAEditadaDominio, cuentaActualDominio);
     }
     
     

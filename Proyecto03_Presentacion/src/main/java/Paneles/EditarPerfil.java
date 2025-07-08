@@ -47,7 +47,7 @@ public class EditarPerfil extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Nuevco Correo Electronico");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
@@ -57,11 +57,11 @@ public class EditarPerfil extends javax.swing.JPanel {
         campoNuevoCorreoE.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel1.add(campoNuevoCorreoE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 230, 40));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Nuevo Nombre de Usuario");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Contrasenha");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
 
@@ -94,7 +94,7 @@ public class EditarPerfil extends javax.swing.JPanel {
 
         comboDominio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "@gmail.com", "@outlook.com", "@outlook.es", "@hotmail.com" }));
-        jPanel1.add(comboDominio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 170, -1));
+        jPanel1.add(comboDominio, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 170, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1010, 620));
     }// </editor-fold>//GEN-END:initComponents
@@ -126,14 +126,15 @@ public class EditarPerfil extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void obtenerDatos(){
-        CuentaDTO cuenta = control.obtenerCuenta();
+        CuentaDTO cuenta = control.obtenerCuentaEditada();
         String nuevoNombre = campoNuevoNombre.getText();
         String nuevaContra = campoNuevaContra.getText();
         String nuevoCorre = campoNuevoCorreoE.getText() + comboDominio.getSelectedItem().toString();
         cuenta.setContrasenha(nuevaContra);
         cuenta.setCorreoE(nuevoCorre);
         cuenta.setNombreU(nuevoNombre);
-        
+        cuenta.setId(cuenta.getId());
+        control.setCuentaAEditar(cuenta);
     }
 
 }

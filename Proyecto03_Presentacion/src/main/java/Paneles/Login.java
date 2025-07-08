@@ -4,6 +4,7 @@
  */
 package Paneles;
 import ControlNavegacion.controlApp;
+import DTO.CuentaDTO;
 /**
  *
  * @author HP
@@ -96,6 +97,10 @@ public class Login extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void validarCredenciales(){
-        control.validarCredenciales(campoCorreoE.getText(), campoContrasenha.getText());
+        CuentaDTO cuenta = new CuentaDTO();
+        cuenta.setCorreoE(campoCorreoE.getText());
+        cuenta.setContrasenha(campoContrasenha.getText());
+        control.setCuenta(cuenta);
+        control.validarCredenciales();
     }
 }

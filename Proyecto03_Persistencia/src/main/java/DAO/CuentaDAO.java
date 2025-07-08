@@ -12,6 +12,7 @@ import Encriptador.Encriptador;
 import Interfaces.ICuentaDAO;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import org.bson.Document;
 
@@ -41,16 +42,14 @@ public class CuentaDAO implements ICuentaDAO {
     @Override
     public CuentaDominio iniciarSesion(String corrreoE, String contra){
         for(CuentaDominio cuenta : coleccionCuentas.find()){
+            System.out.println("Cuentas>DAO>IniciarSesion>  " +  cuenta.toString());
             if(cuenta.getCorreoE().equals(corrreoE)){
                 System.out.println("Cuenta encontrada:  " + cuenta.toString());
-                obtenerCuenta(corrreoE);
                 //validar contrasenha
                 // la variable "contra" es la q ingresa el usuario y la encriptamos
                 if(encriptador.encriptarContrasenha(contra).equals(cuenta.getContrasenha())){//verificamos con la contra que tenemos guardada en la bd (ya encriptada)
                     System.out.println("Inicio de sesion correcto!");
-                    return obtenerCuenta(cuenta.getCorreoE()); // obtenemos la cuenta una vez iniciada la sesion
-                    
-                    
+                    return cuenta; // obtenerCuenta(cuenta.getCorreoE()); // obtenemos la cuenta una vez iniciada la sesion
                 }else{
                     //control.mostrarErrorCredencialesIncorrectas();
                     System.out.println("Credenciales Incorrectas!");
@@ -72,24 +71,21 @@ public class CuentaDAO implements ICuentaDAO {
         
     }
     @Override
-    public void editarCuenta(CuentaDominio cambios){
+    public void editarCuenta(CuentaDominio cambios, CuentaDominio cuentaAEditar){
         //cuentaAEditar traera los nuevos atributos y estos seran seteados al documento que se encuentre en la coleccion
-        Document cuentaEncontrada = new Document("nombreUsuario", cambios.getNombreU());//tengo que buscar una manera mas facil de tener la cuenta desde el inicio
-        if(cuentaEncontrada == null){
-            System.out.println("Cuenta no encontrada");
-            return; //nunca sera null pq se supone que se inicia sesion al iniciar la app
-        }
-        System.out.println("Cuenta antes de ser editada :  " + cuentaEncontrada.toString());
+        Document cuentaEncontrada = new Document("_id", cuentaAEditar.getId());//filtro del coumento
+        
         Document cuentaActualizada = new Document(); // documento para setear los nuevos datos
-        cuentaActualizada.append("nombreUsuario", cambios.getNombreU());
+        
+        cuentaActualizada.append("nombreUsuario", cambios.getNombreUsuario());
         cuentaActualizada.append("contrasenha", encriptador.encriptarContrasenha(cambios.getContrasenha()));
         cuentaActualizada.append("correoE", cambios.getCorreoE());
+        
         //falta el icono del perfil
         
-        Document actualizar = new Document("$set", cuentaActualizada); //seteamos los valores al documento con "$set"
-        
-        coleccionCuentas.updateOne(cuentaEncontrada, actualizar);
-        System.out.println("Cuenta Editada :  " + coleccionCuentas.updateOne(cuentaEncontrada, actualizar).toString());
+        Document actualizar = new Document("$set", cuentaActualizada);
+        UpdateResult resultado = coleccionCuentas.updateOne(cuentaEncontrada, actualizar);
+        System.out.println("Cuenta Editada :  " +resultado.toString());
         
    
     }
