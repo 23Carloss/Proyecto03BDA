@@ -9,10 +9,12 @@ import DTO.CuentaDTO;
 import Dominio.CuentaDominio;
 import FrabicaBO.FabricaBO;
 import Interfacez.ICuentaBO;
+import Paneles.EditarPerfil;
 import Paneles.Login;
 import Paneles.MenuPrincipal;
 import Paneles.Perfil;
 import Paneles.Registrarse;
+import Paneles.ResumenCambios;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -27,6 +29,8 @@ public class controlApp {
     private Registrarse panelRegistro;
     private MenuPrincipal menuPrincipal;
     private Perfil perfil;
+    private EditarPerfil editarPerfil;
+    private ResumenCambios resumenCambios;
     private JFrame framePrincipal;
     
     //Objetos BO se ocupa la fabrica
@@ -75,6 +79,23 @@ public class controlApp {
     public void mostrarMenuPerfil(){
         perfil = new Perfil(this);
         cambiarPanel(perfil);
+    }
+    public void mostrarEditarPerfil(){
+        editarPerfil = new EditarPerfil(this);
+        cambiarPanel(editarPerfil);
+    }
+    public void mostrarConfirmarCambios(){
+        resumenCambios = new ResumenCambios(this);
+        cambiarPanel(resumenCambios);
+        confirmarCambios();
+    }
+    
+    public void confirmarCambios(){
+        CuentaDominio cuentaEditada = new CuentaDominio();
+        cuentaEditada.setNombreU(cuentaTemporal.getNombreU());
+        cuentaEditada.setCorreoE(cuentaTemporal.getCorreoE());
+        cuentaEditada.setContrasenha(cuentaTemporal.getContrasenha());
+        cuentaBO.editarPerfil(cuentaEditada);
     }
     
     public void cambiarPanel(JPanel jpanel) {

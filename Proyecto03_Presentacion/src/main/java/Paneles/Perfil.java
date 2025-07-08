@@ -98,11 +98,11 @@ public class Perfil extends javax.swing.JPanel {
 
         jPanel1.add(panelInfoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 720, 270));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 820, 630));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 820, 620));
 
         campoBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoBusqueda.setText("Busca una cancion, artista, album");
-        add(campoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 460, 40));
+        add(campoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 460, 40));
 
         BtnMenu.setBackground(new java.awt.Color(0, 0, 0));
         BtnMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -113,11 +113,12 @@ public class Perfil extends javax.swing.JPanel {
                 BtnMenuMouseClicked(evt);
             }
         });
-        add(BtnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 100, 40));
+        add(BtnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEditarMouseClicked
         // TODO add your handling code here:
+       control.mostrarEditarPerfil();
     }//GEN-LAST:event_BtnEditarMouseClicked
 
     private void BtnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenuMouseClicked
